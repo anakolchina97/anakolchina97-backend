@@ -28,7 +28,16 @@ services:
       - "1337:1337"
     depends_on:
       - strapiDB
-
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/amd64 #for platform error on Apple M1 chips
+    ports:
+      - "8888:80"
+    environment:
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 1G
+    depends_on:
+      - strapiDB
   strapiDB:
     container_name: strapiDB
     platform: linux/amd64 #for platform error on Apple M1 chips
